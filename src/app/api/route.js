@@ -5,7 +5,6 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
-/* - - - - - - - - - - - - - - - - */
 const auth = new google.auth.GoogleAuth({
   credentials: {
     client_email: process.env.GS_CLIENT_EMAIL,
@@ -15,7 +14,6 @@ const auth = new google.auth.GoogleAuth({
 });
 
 const sheets = google.sheets({ version: 'v4', auth });
-
 const { GS_SHEET_ID, GS_SHEET_NAME } = process.env;
 const sheetRange = `${GS_SHEET_NAME}!A1:E`;
 const searchRange = `${GS_SHEET_NAME}!A:A`;
@@ -25,10 +23,7 @@ const handleError = (error, message) => {
   return NextResponse.json({ error: message }, { status: 500 });
 };
 
-/* - - - - - - - - - - - - - - - - */
-/* Handle GET requests to fetch data from Google Sheets | Sree | 04 Aug 2024 */
-/* - - - - - - - - - - - - - - - - */
-export async function GET() {
+export const GET = async () => {
   try {
     const { data: { values = [] } } = await sheets.spreadsheets.values.get({
       spreadsheetId: GS_SHEET_ID,
@@ -38,12 +33,9 @@ export async function GET() {
   } catch (error) {
     return handleError(error, 'Failed to fetch data');
   }
-}
+};
 
-/* - - - - - - - - - - - - - - - - */
-/* Handle POST requests to add data to Google Sheets | Sree | 04 Aug 2024 */
-/* - - - - - - - - - - - - - - - - */
-export async function POST(request) {
+export const POST = async (request) => {
   try {
     const { col0, col1, col2, col3, col4 = '' } = await request.json();
     const res = await sheets.spreadsheets.values.append({
@@ -56,19 +48,16 @@ export async function POST(request) {
   } catch (error) {
     return handleError(error, 'Failed to add data');
   }
-}
+};
 
-/* - - - - - - - - - - - - - - - - */
-/* Handle PUT requests to update data in Google Sheets | Sree | 04 Aug 2024 */
-/* - - - - - - - - - - - - - - - - */
-export async function PUT(request) {
+export const PUT = async (request) => {
   try {
     const { col0, col1, col2, col3, col4 = '' } = await request.json();
     const { data: { values } } = await sheets.spreadsheets.values.get({
       spreadsheetId: GS_SHEET_ID,
       range: searchRange,
     });
-    
+
     const rowIndex = values.findIndex(row => row[0] === col0);
     if (rowIndex === -1) return NextResponse.json({ error: 'Data not found' }, { status: 404 });
 
@@ -83,24 +72,21 @@ export async function PUT(request) {
   } catch (error) {
     return handleError(error, 'Failed to update data');
   }
-}
+};
 
-/* - - - - - - - - - - - - - - - - */
-/* Handle DELETE requests to remove data from Google Sheets | Sree | 04 Aug 2024 */
-/* - - - - - - - - - - - - - - - - */
-export async function DELETE(request) {
+export const DELETE = async (request) => {
   try {
     const col0 = new URL(request.url).searchParams.get('col0');
     if (!col0) return NextResponse.json({ error: 'Missing col0 parameter' }, { status: 400 });
 
-    const [sheetsResponse, valuesResponse] = await Promise.all([
+    const [{ data: sheetsData }, { data: { values } }] = await Promise.all([
       sheets.spreadsheets.get({ spreadsheetId: GS_SHEET_ID }),
       sheets.spreadsheets.values.get({ spreadsheetId: GS_SHEET_ID, range: searchRange }),
     ]);
 
-    const sheetId = sheetsResponse.data.sheets.find(sheet => sheet.properties.title === GS_SHEET_NAME).properties.sheetId;
-    const rowIndex = valuesResponse.data.values.findIndex(row => row[0] === col0);
-    
+    const sheetId = sheetsData.sheets.find(sheet => sheet.properties.title === GS_SHEET_NAME).properties.sheetId;
+    const rowIndex = values.findIndex(row => row[0] === col0);
+
     if (rowIndex === -1) return NextResponse.json({ error: 'Data not found' }, { status: 404 });
 
     await sheets.spreadsheets.batchUpdate({
@@ -108,12 +94,7 @@ export async function DELETE(request) {
       requestBody: {
         requests: [{
           deleteDimension: {
-            range: {
-              sheetId,
-              dimension: 'ROWS',
-              startIndex: rowIndex,
-              endIndex: rowIndex + 1,
-            },
+            range: { sheetId, dimension: 'ROWS', startIndex: rowIndex, endIndex: rowIndex + 1 },
           },
         }],
       },
@@ -123,5 +104,5 @@ export async function DELETE(request) {
   } catch (error) {
     return handleError(error, 'Failed to delete data');
   }
-}
+};
 /* - - - - - - - - - - - - - - - - */
