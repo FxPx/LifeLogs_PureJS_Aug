@@ -1,357 +1,74 @@
 // /* - - - - - - - - - - - - - - - - */
-// /* page.js | Main component for Life Logs | Sree | 04 Aug 2024 */
+// /* src/app/page.js | Main component for Life Logs | Sree | 04 Aug 2024 */
 // /* - - - - - - - - - - - - - - - - */
 
-// 'use client'
-// import { useState, useEffect } from 'react'
-// import './FxStyles.css'
+// import ClientComponent from './clientComponent';
 
-// export default function Home() {
-//   const [data, setData] = useState([])
-//   const [headers, setHeaders] = useState([])
-//   const [formData, setFormData] = useState({})
-//   const [editingRow, setEditingRow] = useState(null)
-//   const [editFormData, setEditFormData] = useState({})
-
-//   useEffect(() => {
-//     fetchData()
-//   }, [])
-
-//   const fetchData = async () => {
+// export default async function Home() {
+//   // Fetch data directly within this function
+//   const fetchServerData = async () => {
 //     try {
-//       const res = await fetch('/api')
-//       const result = await res.json()
-//       if (Array.isArray(result.data) && result.data.length > 0) {
-//         const headerRow = result.data[0]
-//         setHeaders(headerRow)
-
-//         // Filter rows: first column should not be empty, and either 2nd or 3rd column should have values
-//         const filteredData = result.data.slice(1).filter(row =>
-//           row[0] && (row[1] || row[2])
-//         )
-//         setData(filteredData)
-//         initializeFormData(headerRow)
-//       } else {
-//         setData([])
-//         setHeaders([])
-//       }
+//       const res = await fetch('https://your-api-endpoint'); // Replace with your API endpoint
+//       // const res = await fetch('/api/route'); // Replace with your API endpoint
+//       if (!res.ok) throw new Error('Failed to fetch data');
+//       const result = await res.json();
+//       const { headers, data, formData } = result;
+//       return { headers, data, formData };
 //     } catch (error) {
-//       console.error('Failed to fetch data:', error)
-//       setData([])
-//       setHeaders([])
+//       console.error('Error fetching server data:', error);
+//       return { headers: [], data: [], formData: {} };
 //     }
-//   }
+//   };
 
-//   const initializeFormData = (headers) => {
-//     const newFormData = {}
-//     headers.forEach((_, index) => {
-//       newFormData[`col${index}`] = ''
-//     })
-//     setFormData(newFormData)
-//   }
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault()
-//     try {
-//       await fetch('/api', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(formData),
-//       })
-//       initializeFormData(headers)
-//       fetchData()
-//     } catch (error) {
-//       console.error('Failed to save data:', error)
-//     }
-//   }
-
-//   const handleDelete = async (col0) => {
-//     try {
-//       await fetch(`/api?col0=${col0}`, { method: 'DELETE' })
-//       fetchData()
-//     } catch (error) {
-//       console.error('Failed to delete data:', error)
-//     }
-//   }
-
-//   const handleEdit = (rowIndex) => {
-//     setEditingRow(rowIndex)
-//     const rowData = data[rowIndex] || []
-//     const newEditFormData = {}
-//     headers.forEach((_, index) => {
-//       newEditFormData[`col${index}`] = rowData[index] || ''
-//     })
-//     setEditFormData(newEditFormData)
-//   }
-
-//   const handleEditChange = (e) => {
-//     const { name, value } = e.target
-//     setEditFormData(prevData => ({ ...prevData, [name]: value }))
-//   }
-
-//   const handleSave = async () => {
-//     try {
-//       await fetch(`/api`, {
-//         method: 'PUT',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(editFormData),
-//       })
-//       setEditingRow(null)
-//       fetchData()
-//     } catch (error) {
-//       console.error('Failed to save data:', error)
-//     }
-//   }
+//   const { headers, data, formData } = await fetchServerData();
 
 //   return (
 //     <main>
-//       <h1>Life Logs</h1>
-
-//       <form onSubmit={handleSubmit}>
-//         {headers.map((header, index) => (
-//           <input
-//             key={index}
-//             type="text"
-//             name={`col${index}`}
-//             placeholder={header}
-//             value={formData[`col${index}`] || ''}
-//             onChange={e => setFormData(prevData => ({ ...prevData, [e.target.name]: e.target.value }))}
-//           />
-//         ))}
-//         <button type="submit">Add Data</button>
-//       </form>
-
-//       <div className='table-container'>
-//         <table>
-//           <thead>
-//             <tr>
-//               {headers.map((heading, index) => (
-//                 <th key={index}>{heading}</th>
-//               ))}
-//               <th>Actions</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {data.map((row, rowIndex) => (
-//               <tr key={rowIndex}>
-//                 {row.map((cell, cellIndex) => (
-//                   <td key={cellIndex}>
-//                     {editingRow === rowIndex ? (
-//                       <input
-//                         type="text"
-//                         name={`col${cellIndex}`}
-//                         value={editFormData[`col${cellIndex}`] || ''}
-//                         onChange={handleEditChange}
-//                       />
-//                     ) : (
-//                       cell || ''
-//                     )}
-//                   </td>
-//                 ))}
-//                 <td>
-//                   {editingRow === rowIndex ? (
-//                     <>
-//                       <button onClick={handleSave}>Save</button>
-//                       <button type="button" onClick={() => setEditingRow(null)}>Cancel</button>
-//                     </>
-//                   ) : (
-//                     <>
-//                       <button onClick={() => handleEdit(rowIndex)}>Edit</button>
-//                       <button onClick={() => handleDelete(row[0])}>Delete</button>
-//                     </>
-//                   )}
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-
-//       {editingRow !== null && (
-//         <div>
-//           <h3>Edit Row</h3>
-//           <form onSubmit={e => { e.preventDefault(); handleSave(); }}>
-//             {headers.map((header, index) => (
-//               <input
-//                 key={index}
-//                 type="text"
-//                 name={`col${index}`}
-//                 value={editFormData[`col${index}`] || ''}
-//                 onChange={handleEditChange}
-//               />
-//             ))}
-//             <button type="submit">Save</button>
-//             <button type="button" onClick={() => setEditingRow(null)}>Cancel</button>
-//           </form>
-//         </div>
-//       )}
+//       <ClientComponent
+//         headers={headers}
+//         data={data}
+//         initialFormData={formData}
+//       />
 //     </main>
-//   )
+//   );
 // }
-
 // /* - - - - - - - - - - - - - - - - */
+
+
+
+
 /* - - - - - - - - - - - - - - - - */
-/* page.js | Main component for Life Logs | Sree | 04 Aug 2024 */
+/* src/app/page.js | Main component for Life Logs | Sree | 04 Aug 2024 */
 /* - - - - - - - - - - - - - - - - */
 
-'use client'
-import { useState, useEffect, useCallback } from 'react'
-import './FxStyles.css'
+import ClientComponent from './clientComponent';
 
-export default function Home() {
-  const [data, setData] = useState([])
-  const [headers, setHeaders] = useState([])
-  const [formData, setFormData] = useState({})
-  const [editingRow, setEditingRow] = useState(null)
-
-  // Memoized fetchData function
-  const fetchData = useCallback(async () => {
+export default async function Home() {
+  // Fetch data directly within this function
+  async function fetchServerData() {
     try {
-      const res = await fetch('/api')
-      const result = await res.json()
-      if (Array.isArray(result.data) && result.data.length > 0) {
-        const [headerRow, ...rows] = result.data
-        setHeaders(headerRow)
-        setData(rows.filter(row => row[0] && (row[1] || row[2])))
-        setFormData(Object.fromEntries(headerRow.map((_, i) => [`col${i}`, ''])))
-      } else {
-        setData([])
-        setHeaders([])
-      }
+      const res = await fetch('/api/route');
+      if (!res.ok) throw new Error('Failed to fetch data');
+      const result = await res.json();
+      const { headers, data, formData } = result;
+      return { headers, data, formData };
     } catch (error) {
-      console.error('Failed to fetch data:', error)
-      setData([])
-      setHeaders([])
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      await fetch('/api', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-      setFormData(Object.fromEntries(headers.map((_, i) => [`col${i}`, ''])))
-      fetchData()
-    } catch (error) {
-      console.error('Failed to save data:', error)
+      console.error('Error fetching server data:', error);
+      return { headers: [], data: [], formData: {} };
     }
   }
+  
 
-  // Handle row deletion
-  const handleDelete = async (col0) => {
-    try {
-      await fetch(`/api?col0=${col0}`, { method: 'DELETE' })
-      fetchData()
-    } catch (error) {
-      console.error('Failed to delete data:', error)
-    }
-  }
-
-  // Start editing a row
-  const handleEdit = (rowIndex) => {
-    setEditingRow(rowIndex)
-  }
-
-  // Save edited row data
-  const handleSave = async (rowData) => {
-    try {
-      await fetch('/api', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(rowData),
-      })
-      setEditingRow(null)
-      fetchData()
-    } catch (error) {
-      console.error('Failed to save data:', error)
-    }
-  }
-
-  // Handle input changes for both forms and table cells
-  const handleInputChange = (e, setStateFunction) => {
-    const { name, value } = e.target
-    setStateFunction(prevData => ({ ...prevData, [name]: value }))
-  }
+  const { headers, data, formData } = await fetchServerData();
 
   return (
     <main>
-      <h1>Life Logs</h1>
-
-      <form onSubmit={handleSubmit}>
-        {headers.map((header, index) => (
-          <input
-            key={index}
-            type="text"
-            name={`col${index}`}
-            placeholder={header}
-            value={formData[`col${index}`] || ''}
-            onChange={e => handleInputChange(e, setFormData)}
-          />
-        ))}
-        <button type="submit">Add Data</button>
-      </form>
-
-      <div className='table-container'>
-        <table>
-          <thead>
-            <tr>
-              {headers.map((heading, index) => (
-                <th key={index}>{heading}</th>
-              ))}
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {row.map((cell, cellIndex) => (
-                  <td key={cellIndex}>
-                    {editingRow === rowIndex ? (
-                      <input
-                        type="text"
-                        name={`col${cellIndex}`}
-                        value={cell || ''}
-                        onChange={e => handleInputChange(e, newData => 
-                          setData(data.map((r, i) => 
-                            i === rowIndex 
-                              ? r.map((c, j) => j === cellIndex ? e.target.value : c) 
-                              : r
-                          ))
-                        )}
-                      />
-                    ) : (
-                      cell || ''
-                    )}
-                  </td>
-                ))}
-                <td>
-                  {editingRow === rowIndex ? (
-                    <>
-                      <button onClick={() => handleSave(Object.fromEntries(row.map((cell, i) => [`col${i}`, cell])))}>Save</button>
-                      <button onClick={() => setEditingRow(null)}>Cancel</button>
-                    </>
-                  ) : (
-                    <>
-                      <button onClick={() => handleEdit(rowIndex)}>Edit</button>
-                      <button onClick={() => handleDelete(row[0])}>Delete</button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <ClientComponent
+        headers={headers}
+        data={data}
+        initialFormData={formData}
+      />
     </main>
-  )
+  );
 }
-
 /* - - - - - - - - - - - - - - - - */
