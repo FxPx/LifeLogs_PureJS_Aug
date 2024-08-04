@@ -1,10 +1,24 @@
-/* - - - - - - - - - - - - - - - - */
 /* Styles for LifeLogs | Sree | 04 Aug 2024 */
-/* - - - - - - - - - - - - - - - - */
 
-main {
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main {
+    flex: 1;
     padding: 20px;
     background-color: #fff;
+    margin: 0 auto;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevents content overflow */
   }
   
   h1 {
@@ -13,11 +27,22 @@ main {
   }
   
   form {
-    margin-bottom: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    box-sizing: border-box; /* Ensures padding is included in the width */
   }
   
   form input {
-    margin-right: 10px;
+    margin: 0;
     padding: 5px;
     border: 1px solid lightgray;
     border-radius: 4px;
@@ -38,12 +63,20 @@ main {
     background-color: #0056b3; /* Darker shade of primary color */
   }
   
-  table {
+  .table-container {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Centers the table horizontally */
+    overflow-y: auto; /* Allows vertical scrolling */
+  }
+  
+  .table-container table {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1400px; /* Restrict maximum width */
     border-collapse: collapse;
-    margin-bottom: 20px;
     background-color: #fafafa;
+    margin-bottom: 20px;
+    height: calc(100vh - 100px); /* Adjust according to form height and any other elements */
   }
   
   th, td {
@@ -69,7 +102,6 @@ main {
   td button {
     padding: 5px 10px;
     background-color: var(--primary-color);
-    /* color: #fff; */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -78,6 +110,4 @@ main {
   td button:hover {
     background-color: #0056b3; /* Darker shade of primary color */
   }
-  
-  /* - - - - - - - - - - - - - - - - */
   
