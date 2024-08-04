@@ -14,24 +14,6 @@
 
   /* Color Variables */
   --foreground: rgb(0, 0, 0);
-  --background-start: rgb(214, 219, 220);
-  --background-end: rgb(255, 255, 255);
-
-  /* Tile Variables */
-  --tile-start: rgb(239, 245, 249);
-  --tile-end: rgb(228, 232, 233);
-  --tile-border: conic-gradient(
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.1),
-    rgba(0, 0, 0, 0.1),
-    rgba(0, 0, 0, 0.5)
-  );
-
-  /* Card Variables */
-  --card-background: rgb(180, 185, 188);
-  --card-border: rgb(131, 134, 135);
 }
 
 /* Reset Default Styles */
@@ -50,12 +32,7 @@ body {
 
 body {
   color: var(--foreground);
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--background-end)
-    )
-    var(--background-start);
+  background: white;
 }
 
 a {
