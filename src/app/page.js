@@ -55,8 +55,8 @@ export default function Home() {
   /* - - - - - - - - - - - - - - - - */
   /* Handle delete operation | Sree | 04 Aug 2024 */
   /* - - - - - - - - - - - - - - - - */
-  const handleDelete = async (id) => {
-    await fetch(`/api?id=${id}`, { method: 'DELETE' })
+  const handleDelete = async (col0) => {
+    await fetch(`/api?col0=${col0}`, { method: 'DELETE' })
     fetchData()
   }
 
@@ -85,7 +85,6 @@ export default function Home() {
 
   /* - - - - - - - - - - - - - - - - */
   /* Handle save operation | Sree | 04 Aug 2024 */
-  /* - - - - - - - - - - - - - - - - */
   const handleSave = async () => {
     await fetch(`/api`, {
       method: 'PUT',
@@ -95,6 +94,10 @@ export default function Home() {
     setEditingRow(null)
     fetchData()
   }
+
+  /* - - - - - - - - - - - - - - - - */
+  /* Check if a row is empty | Sree | 04 Aug 2024 */
+  const isEmptyRow = (row) => row.every(cell => cell === '')
 
   return (
     <main>
@@ -123,7 +126,7 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(data) && data.slice(1).map((row, rowIndex) => (
+          {Array.isArray(data) && data.slice(1).filter(row => !isEmptyRow(row)).map((row, rowIndex) => (
             <tr key={rowIndex}>
               {row.map((cell, cellIndex) => (
                 <td key={cellIndex}>
@@ -170,5 +173,6 @@ export default function Home() {
     </main>
   )
 }
-
+/* - - - - - - - - - - - - - - - - */
+/* End of file | Sree | 04 Aug 2024 */
 /* - - - - - - - - - - - - - - - - */
