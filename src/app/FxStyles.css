@@ -19,7 +19,7 @@ main {
   form input {
     margin-right: 10px;
     padding: 5px;
-    border: 1px solid var(--secondary-color);
+    border: 1px solid lightgray;
     border-radius: 4px;
     background-color: #fff;
     color: var(--foreground);
@@ -27,8 +27,8 @@ main {
   
   form button {
     padding: 5px 10px;
-    background-color: var(--primary-color);
-    color: #fff;
+    background-color: lightblue;
+    color: #323232;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -40,9 +40,10 @@ main {
   
   table {
     width: 100%;
+    max-width: 1400px;
     border-collapse: collapse;
     margin-bottom: 20px;
-    background-color: #fff;
+    background-color: #fafafa;
   }
   
   th, td {
@@ -52,14 +53,14 @@ main {
   }
   
   th {
-    background-color: var(--primary-color);
-    color: #fff;
+    background-color: lightyellow;
+    color: slategray;
   }
   
   td input {
     width: 100%;
     padding: 5px;
-    border: 1px solid var(--secondary-color);
+    border: 1px solid lightgray;
     border-radius: 4px;
     background-color: #fff;
     color: var(--foreground);
