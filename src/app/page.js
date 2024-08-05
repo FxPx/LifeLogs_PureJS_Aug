@@ -2,14 +2,16 @@
 /* src/app/page.js | Main component for Life Logs | Sree | 04 Aug 2024 */
 /* - - - - - - - - - - - - - - - - */
 
-import FxShowAllData from './clientComponent';
+import FxShowAllData from './fxFetchAllData';
 
 export default async function HomePage() {
 
   async function fetchServerData() {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-      const res = await fetch(`${baseUrl}/api`);
+      const res = await fetch(`${baseUrl}/api?cachebuster=${Date.now()}`, {
+        cache: 'no-cache',
+      });
       if (!res.ok) throw new Error('Failed to fetch data');
       const result = await res.json();
       const { data } = result;
@@ -28,13 +30,18 @@ export default async function HomePage() {
   const { headers, data, formData } = await fetchServerData();
 
   return (
-    <main>
-      <FxShowAllData
-        initialHeaders={headers}
-        initialData={data}
-        initialFormData={formData}
-      />
-    </main>
+    <>
+      <header className='NavBar'>
+        <h1>Life Logs</h1>
+      </header>
+      <main>
+        <FxShowAllData
+          initialHeaders={headers}
+          initialData={data}
+          initialFormData={formData}
+        />
+      </main>
+    </>
   );
 }
 /* - - - - - - - - - - - - - - - - */

@@ -1,11 +1,7 @@
-/* - - - - - - - - - - - - - - - - */
-/* Global CSS Styles | Sree | 04 Aug 2024 */
-/* - - - - - - - - - - - - - - - - */
-
 :root {
   /* Layout Variables */
   --max-width: 1100px;
-  --border-radius: 12px;
+  --border-radius: 8px;
 
   /* Font Variables */
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
@@ -13,7 +9,9 @@
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   /* Color Variables */
-  --foreground: rgb(0, 0, 0);
+  --foreground: #333333;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
 }
 
 /* Reset Default Styles */
@@ -28,14 +26,37 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  margin: 0;
 }
 
+
 body {
+  display: flex;
+  flex-direction: column;
   color: var(--foreground);
   background: white;
+  background: lightcyan;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Main Container Styles */
+main {
+  flex: 1;
+  background-color: #fff;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header Styles */
+h1 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--foreground);
 }
