@@ -37,13 +37,18 @@
 
 
 
+/* - - - - - - - - - - - - - - - - */
+/* src/app/page.js | Main component for Life Logs | Sree | 04 Aug 2024 */
+/* - - - - - - - - - - - - - - - - */
 import FxShowAllData from './clientComponent';
 
 export default async function HomePage() {
   // Fetch data directly within this function
   async function fetchServerData() {
     try {
-      const res = await fetch('http://localhost:3000/api');
+      // const res = await fetch('http://localhost:3000/api');
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+      const res = await fetch(`${baseUrl}/api`);
       if (!res.ok) throw new Error('Failed to fetch data');
       const result = await res.json();
       const { data } = result;
@@ -71,3 +76,5 @@ export default async function HomePage() {
     </main>
   );
 }
+
+/* - - - - - - - - - - - - - - - - */
