@@ -1,0 +1,65 @@
+/* - - - - - - - - - - - - - - - - - - - - */
+/* src/app/cal/cal.css | Calendar Page Styles | Sree | 12 Aug 2024 */
+/* - - - - - - - - - - - - - - - - - - - - */
+
+.calendarGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    /* padding: 24px; */
+}
+
+.monthCalendar {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    font-family: var(--font-inter), 'Arial', sans-serif;
+    padding: 16px;
+}
+
+.react-calendar {
+    width: 100%;
+    border: none; /* Remove default border */
+    font-family: inherit;
+}
+
+/* Default tile styles */
+.react-calendar__tile {
+    color: var(--text-color); /* Default text color */
+}
+
+/* Hover state for tiles */
+.react-calendar__tile:hover {
+    background-color: ghostwhite !important; /* Background color on hover */
+    /* color: white !important; */
+}
+
+/* Active tile styles */
+.react-calendar__tile--active {
+    background-color: var(--button-bg) !important; /* Active date background */
+    color: white !important; /* Text color for active date */
+}
+
+/* src/app/cal/cal.css | Calendar Page Styles | Sree | 12 Aug 2024 */
+
+/* Highlight today's date */
+.react-calendar__tile.highlight-today {
+    background-color: var(--button-bg) !important; /* Highlight background */
+    color: white !important; /* Highlight text color */
+    border-radius: 4px; /* Optional: rounded corners */
+}
+
+/* src/app/cal/cal.css */
+
+.react-calendar__navigation {
+    display: none; /* Hides the navigation controls (month/year selector) */
+}
+
+.react-calendar__month-view__weekdays {
+    display: none; /* Optionally hide weekday names if needed */
+}
+
+.react-calendar__month-view__days {
+    font-family: var(--font-inter), 'Arial', sans-serif; /* Ensure the font is consistent */
+}

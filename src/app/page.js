@@ -1,47 +1,31 @@
-/* - - - - - - - - - - - - - - - - */
-/* src/app/page.js | Main component for Life Logs | Sree | 04 Aug 2024 */
-/* - - - - - - - - - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - */
+/* src/app/page.js | Main Page | Sree | 06 Aug 2024 */
+/* - - - - - - - - - - - - - - - - - - - - */
 
-import FxShowAllData from './fxFetchAllData';
+"use client";
 
-export default async function HomePage() {
+import React, { useState, useEffect } from 'react';
 
-  async function fetchServerData() {
-    try {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-      const res = await fetch(`${baseUrl}/api?cachebuster=${Date.now()}`, {
-        cache: 'no-cache',
-      });
-      if (!res.ok) throw new Error('Failed to fetch data');
-      const result = await res.json();
-      const { data } = result;
-      if (Array.isArray(data) && data.length > 0) {
-        const [headers, ...rows] = data;
-        const formData = Object.fromEntries(headers.map((_, i) => [`col${i}`, '']));
-        return { headers, data: rows, formData };
-      }
-      return { headers: [], data: [], formData: {} };
-    } catch (error) {
-      console.error('Error fetching server data:', error);
-      return { headers: [], data: [], formData: {} };
-    }
-  }
+const generateDummyContent = () => {
+    let content = [];
+    for (let i = 0; i < 100; i++) {
+        content.push(<p key={i}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>);
+    } // Generate dummy content with 100 paragraphs
+    return content;
+};
 
-  const { headers, data, formData } = await fetchServerData();
+const Page = () => {
+    const [content, setContent] = useState([]);
 
-  return (
-    <>
-      <header className='NavBar'>
-        <h1>Life Logs</h1>
-      </header>
-      <main>
-        <FxShowAllData
-          initialHeaders={headers}
-          initialData={data}
-          initialFormData={formData}
-        />
-      </main>
-    </>
-  );
-}
-/* - - - - - - - - - - - - - - - - */
+    useEffect(() => {
+        setContent(generateDummyContent()); // Set content on component mount
+    }, []);
+
+    return (
+        <>
+            {content}
+        </>);
+};
+
+export default Page;
+/* - - - - - - - - - - - - - - - - - - - - */

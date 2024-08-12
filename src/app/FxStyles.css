@@ -1,153 +1,102 @@
-/* FxStyles.css | Styles for LifeLogs | Sree | 04 Aug 2024 */
+/* - - - - - - - - - - - - - - - - - - - - */
+/* src/app/fxStyles.css | Styles for Fx Components | Sree | 06 Aug 2024 */
+/* - - - - - - - - - - - - - - - - - - - - */
 
 /* Navbar Styles */
-.NavBar {
+.fxNavBar {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
-    width: 100%;
     height: 64px;
+    align-items: center;
     padding: 8px 24px;
+    color: var(--text-color);
+    background: var(--background);
     border-bottom: 0.5px solid lightgray;
-    background-color: #f9fafa;
-    position: sticky;
+    z-index: 1000;
+    /* Fix the navbar at the top */
     position: fixed;
     top: 0;
-    z-index: 1000;
-}
-main {
-    margin-top: 64px; /* Matches the height of the navbar */
-    padding: 0 24px;
+    left: 0;
+    right: 0;
 }
 
-.NavBar>div {
+.fxNavBar>div {
     display: flex;
     align-items: center;
-    justify-content: center;
+    font-size: 14px;
+    color: var(--foreground);
 }
 
-/* Form Styles */
-form {
+.fxNavBar>div:first-child {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.fxNavBar>div:last-child {
+    justify-self: flex-end;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - */
+/* Tab container styles */
+.tabsWrap {
+    display: flex;
+    min-height: 40px;
+    max-height: 40px;
+    /* max-width: max-content; */
+    /* justify-content: space-around; */
+    /* justify-self: flex-end; */
+    background: lightcyan;
+    border: 1px solid lightgray;
+}
+
+.tabsWrap, .divTab {
+    box-sizing: border-box;
+}
+
+:root { --tabBorder: 4px; }
+
+.divTab {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-bottom: var(--tabBorder) solid transparent;
+    transition: background-color 0.15s ease;
+}
+
+.divTab:hover {
+    box-sizing: border-box;
+    border-bottom: var(--tabBorder) solid var(--border-color);
+}
+
+.divTab.active {
+    box-sizing: border-box;
+    border-bottom: var(--tabBorder) solid var(--button-bg);
+}
+/* - - - - - - - - - - - - - - - - - - - - */
+
+/* Fixed chat input */
+.divInputs {
+    background: #333;
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 10px;
     position: fixed;
     bottom: 0;
+    width: 100%;
     left: 0;
-    width: 100%;
+    z-index: 10;
     height: 40px;
-    max-height: 40px;
-    padding: 10px 20px;
-    background-color: #fff;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    box-sizing: border-box;
+    align-content: center;
+    padding: 0 24px;
+    color: #ffffff;
 }
 
-form input {
-    margin: 0;
+.divInputs input {
+    width: calc(100% - 20px);
     padding: 5px;
-    border: 1px solid lightgray;
     border-radius: 4px;
-    background-color: #fff;
-    color: var(--foreground);
-}
-
-form button {
-    padding: 5px 10px;
-    background-color: lightblue;
-    color: #323232;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
-form button:hover {
-    background-color: #0056b3;
-}
-
-
-/* Table Container Styles */
-.wrapTable {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    overflow-y: auto;
-}
-
-.wrapTable table {
-    width: 100%;
-    max-width: 1200px; /* Set max-width to 1200px */
-    border-collapse: collapse;
-    background-color: #fafafa;
-    margin-bottom: 56px;
-    border-radius: 4px;
-    overflow: hidden;
-    table-layout: auto; /* Adjust column widths based on content */
-}
-
-th,
-td {
-    box-sizing: border-box;
-    padding: 0 16px;
-    border: 1px solid var(--secondary-color);
-    text-align: left;
-    height: 40px;
-}
-
-th {
-    background-color: lightyellow;
-    color: slategray;
-}
-
-td input {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid lightgray;
-    border-radius: 4px;
-    background-color: #fff;
-    color: var(--foreground);
-}
-
-td button {
-    padding: 5px 10px;
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    background: lightsalmon;
-}
-
-td button:hover {
-    background-color: #0056b3;
-}
-
-/* Style for the monthHeader row */
-.monthHeader {
-    background-color: lightblue;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Ensure the last column expands to fit content */
-.wrapTable td:last-child {
-    background: coral;
-    width: 128px; /* Allow the last column to expand */
-    white-space: nowrap; /* Prevent text wrapping */
-}
-
-td {
-    height: 24px;
-    background: darkseagreen;
-    word-wrap: break-word; /* Handle long text in cells */
-}
-
-/* Ensure other columns are responsive */
-.wrapTable table {
-    table-layout: auto; /* Adjust column widths based on content */
-}
-
-th,
-td {
-    min-width: 50px; /* Minimum width for columns for better responsiveness */
-}
+/* - - - - - - - - - - - - - - - - - - - - */
