@@ -41,16 +41,12 @@
     color: white !important; /* Text color for active date */
 }
 
-/* src/app/cal/cal.css | Calendar Page Styles | Sree | 12 Aug 2024 */
-
 /* Highlight today's date */
 .react-calendar__tile.highlight-today {
     background-color: var(--button-bg) !important; /* Highlight background */
     color: white !important; /* Highlight text color */
     border-radius: 4px; /* Optional: rounded corners */
 }
-
-/* src/app/cal/cal.css */
 
 .react-calendar__navigation {
     display: none; /* Hides the navigation controls (month/year selector) */
@@ -63,3 +59,6 @@
 .react-calendar__month-view__days {
     font-family: var(--font-inter), 'Arial', sans-serif; /* Ensure the font is consistent */
 }
+
+
+/* - - - - - - - - - - - - - - - - - - - - */
