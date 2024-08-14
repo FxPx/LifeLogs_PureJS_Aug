@@ -3,7 +3,7 @@
 /* - - - - - - - - - - - - - - - - - - - - */
 
 import React from 'react';
-import '../fxStyles.css';
+import '../FxStyles.css';
 import FxTabs from './fxTabs'; // Import the fxTabs component
 
 const FxTitleBar = () => {
