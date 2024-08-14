@@ -248,7 +248,7 @@
 "use client"
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { parse, format, isValid } from 'date-fns';
-import './FxStyles.css';
+import './fxStyles.css';
 
 /* - - - - - - - - - - - - - - - - */
 

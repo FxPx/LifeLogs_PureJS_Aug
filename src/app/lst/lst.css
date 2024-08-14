@@ -1,0 +1,16 @@
+/* - - - - - - - - - - - - - - - - - - - - */
+/* src/app/lst/lst.css | List Page Styles | Sree | 13 Aug 2024 */
+/* - - - - - - - - - - - - - - - - - - - - */
+
+.list-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.list-cell {
+    padding: 4px 8px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+/* - - - - - - - - - - - - - - - - - - - - */

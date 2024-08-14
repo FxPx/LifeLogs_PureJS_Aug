@@ -6,6 +6,9 @@
   /* Layout Variables */
   --maxWidth: 1200px;
   --borderRadius: 8px;
+  --hNavBar: 56px;
+  --hFooter: 48px;
+  --hInputs: 34px;
 
   /* Font Variables */
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
@@ -15,15 +18,15 @@
   /* Color Variables */
   --foreground: #333333;
   --background: #f4f7f6;
-  --primary-color: #1e90ff;
+  --clrPrimary: #1e90ff;
   --secondary-color: #ff6347;
   --tertiary-color: #32cd32;
-  --text-color: #2e2e2e;
-  --secondary-text-color: #6c757d;
+  --txtClrPrimary: #2e2e2e;
+  --txtClrSecondary: #6c757d;
   --button-bg: #1e90ff;
   --button-border: #1e90ff;
-  --button-hover-bg: #1a7cc7;
-  --button-text-color: #ffffff;
+  --button-hover-bg: #020303;
+  --txtBtn_White: #ffffff;
   --border-color: #ced4da;
   --shadow-color: rgba(0, 0, 0, 0.1);
 
@@ -55,7 +58,7 @@ body {
   flex-direction: column;
   height: auto;
   /* min-height: 100vh; */
-  color: var(--text-color); /* Default text color */
+  color: var(--txtClrPrimary); /* Default text color */
   background: #ffffff;
   overflow: hidden;
 }
@@ -71,11 +74,12 @@ main {
   width: 100vw;
   max-width: var(--maxWidth);
   margin: 0 auto;
-  margin-top: 64px; /* Ensure the content starts below the fxNavBar */
+  margin-top: var(--hNavBar); /* Ensure the content starts below the fxNavBar */
+
   background: lightgreen;
   background: ghostwhite;
   position: relative;
-  padding: 24px 16px 48px 16px;
+  padding: 24px 16px 64px 16px;
 }
 
 a {
@@ -86,7 +90,7 @@ a {
 /* Button Styles */
 button {
   background-color: var(--button-bg);
-  color: var(--button-text-color);
+  color: var(--txtBtn_White);
   border: 1px solid var(--button-border);
   border-radius: var(--borderRadius);
   padding: 10px 20px;

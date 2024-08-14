@@ -16,25 +16,24 @@ const auth = new google.auth.GoogleAuth({
 const sheets = google.sheets({ version: 'v4', auth });
 const { GS_SHEET_ID, GS_SHEET_NAME } = process.env;
 const sheetRange = `${GS_SHEET_NAME}!A1:E`;
+const searchRange = `${GS_SHEET_NAME}!A:A`;
 
 const handleError = (error, message) => {
   console.error(`${message}:`, error);
   return NextResponse.json({ error: message }, { status: 500 });
 };
-/* - - - - - - - - - - - - - - - - */
 
 export const GET = async () => {
   try {
     const { data: { values = [] } } = await sheets.spreadsheets.values.get({
       spreadsheetId: GS_SHEET_ID,
-      range: sheetRange, // Fetch only the first 5 columns
+      range: sheetRange,
     });
     return NextResponse.json({ data: values });
   } catch (error) {
     return handleError(error, 'Failed to fetch data');
   }
 };
-/* - - - - - - - - - - - - - - - - */
 
 export const POST = async (request) => {
   try {
@@ -50,7 +49,6 @@ export const POST = async (request) => {
     return handleError(error, 'Failed to add data');
   }
 };
-/* - - - - - - - - - - - - - - - - */
 
 export const PUT = async (request) => {
   try {
@@ -75,7 +73,6 @@ export const PUT = async (request) => {
     return handleError(error, 'Failed to update data');
   }
 };
-/* - - - - - - - - - - - - - - - - */
 
 export const DELETE = async (request) => {
   try {
