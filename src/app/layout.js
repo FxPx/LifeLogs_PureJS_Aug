@@ -4,7 +4,7 @@
 
 // import { Inter } from "next/font/google";
 // import "./globals.css";
-// import "./FxStyles.css";
+// import "./fxStyles.css";
 // import FxTitleBar from "./bits/fxTitleBar";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -42,7 +42,7 @@
 // import React from 'react';
 // import { Inter } from "next/font/google";
 // import "./globals.css";
-// import "./FxStyles.css";
+// import "./fxStyles.css";
 // import FxTitleBar from "./bits/fxTitleBar";
 // import { fetchSheetData } from './api/fxFetchData';
 
@@ -92,7 +92,7 @@
 import React from 'react';
 import { Inter } from "next/font/google";
 import "./globals.css";
-import "./FxStyles.css";
+import "./fxStyles.css";
 import FxTitleBar from "./bits/fxTitleBar";
 import { fetchSheetData } from './api/fxFetchData';
 import { DataProvider } from './DataContext';
