@@ -77,7 +77,7 @@
 }
 /* - - - - - - - - - - - - - - - - - - - - */
 
-/* Fixed chat input */
+/* Fixed input at the bottom */
 .divInputs {
     height: var(--hFooter);
     width: 100%;
