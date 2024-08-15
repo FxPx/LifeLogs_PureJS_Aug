@@ -8,7 +8,7 @@ import "./globals.css";
 import "./fxPatterns.css";
 import FxTitleBar from "./bits/fxTitleBar";
 import { fetchSheetData } from './api/fxFetchData';
-import { DataProvider } from './DataContext';
+import { DataProvider } from './fxDataContext';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +18,16 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const initialData = await fetchSheetData(); // Fetch data server-side
+  const initialData = await fetchSheetData(); // Fetch data from server-side
 
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet"
+        />
+      </head>
       <body className={inter.className}>
         <DataProvider initialData={initialData}>
           <FxTitleBar />
@@ -36,4 +42,5 @@ export default async function RootLayout({ children }) {
     </html>
   );
 }
+
 /* - - - - - - - - - - - - - - - - - - - - */

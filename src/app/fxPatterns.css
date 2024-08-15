@@ -68,7 +68,7 @@
 
 .divTab:hover {
     box-sizing: border-box;
-    border-bottom: var(--tabBorder) solid var(--border-color);
+    border-bottom: var(--tabBorder) solid var(--clrBorder);
 }
 
 .divTab.active {
@@ -82,7 +82,7 @@
     height: var(--hFooter);
     width: 100%;
     color: white;
-    background: var(--secondary-color);
+    background: var(--clrSecondary);
     padding: 0 16px;
     position: fixed;
     align-content: center;

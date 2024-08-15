@@ -6,25 +6,25 @@
 
 import React, { useState, useMemo } from 'react';
 import Calendar from 'react-calendar';
-import { useData } from '../DataContext';
+import { useData } from '../fxDataContext';
 import 'react-calendar/dist/Calendar.css';
 import '../cal/cal.css';
-
+/* - - - - - - - - - - - - - - - - - - - - */
 const parseDate = dateString => {
     const parts = dateString.split('/');
     return parts.length === 3 ? new Date(parts[2], parts[0] - 1, parts[1]) : null;
 };
-
+/* - - - - - - - - - - - - - - - - - - - - */
 const getDotColor = (value, [min, max]) => {
     const numValue = Number(value);
     return !isNaN(numValue) && numValue >= min && numValue <= max ? 'var(--clrGood)' : 'var(--clrBad)';
 };
-
+/* - - - - - - - - - - - - - - - - - - - - */
 const logConfig = [
     { index: 2, colorRange: [80, 130], label: ' F' },
     { index: 3, colorRange: [0, 180], label: ' P' }
 ];
-
+/* - - - - - - - - - - - - - - - - - - - - */
 export default function fxShowCalendar() {
     const initialData = useData();
     const [selectedDate, setSelectedDate] = useState(null);
@@ -72,17 +72,50 @@ export default function fxShowCalendar() {
             </div>
         );
     };
-
+    /* - - - - - - - - - - - - - - - - - - - - */
     const handleDayClick = date => setSelectedDate(prev => prev?.getTime() === date.getTime() ? null : date);
+    /* - - - - - - - - - - - - - - - - - - - - */
 
+    // const renderLogDetails = (log) => {
+    //     if (!log) return null;
+
+    //     return (
+    //         <div className="divWrapLog">
+    //             <span className="log-values">
+    //                 {logConfig.map(({ index, label }) => log[index] && `${log[index]}${label}`).filter(Boolean).join(', ')}
+    //             </span>
+    //             {log[4] && (
+    //                 <div className="log-comments">
+    //                     {log[4]}
+    //                     <span
+    //                         className="material-symbols-outlined close-icon"
+    //                         onClick={() => setSelectedDate(null)}
+    //                     >
+    //                         close
+    //                     </span>
+    //                 </div>
+    //             )}
+    //         </div>
+    //     );
+    // };
     const renderLogDetails = (log) => {
         if (!log) return null;
+
         return (
-            <div className="log-details">
+            <div className="divWrapLog">
                 <span className="log-values">
                     {logConfig.map(({ index, label }) => log[index] && `${log[index]}${label}`).filter(Boolean).join(', ')}
                 </span>
-                {log[4] && <span className="log-comments">{log[4]}</span>}
+                <div className="log-comments">
+                    {log[4] && (<span> {log[4]} </span>)}
+                    {/* If log[4] has a value, it will be rendered inside a <span>. */}
+                    <span
+                        className="material-symbols-outlined close-icon"
+                        onClick={() => setSelectedDate(null)}
+                    >
+                        close
+                    </span>
+                </div>
             </div>
         );
     };
@@ -96,6 +129,8 @@ export default function fxShowCalendar() {
             {calendarMonths.map((monthDate, index) => (
                 <div key={index} className="monthCalendar">
                     <p>{monthDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</p>
+                    {selectedDate && selectedDate.getMonth() === monthDate.getMonth() &&
+                        renderLogDetails(logMap.get(selectedDate.toLocaleDateString('en-US')))}
                     <Calendar
                         defaultActiveStartDate={monthDate}
                         tileClassName={tileClassName}
@@ -106,8 +141,6 @@ export default function fxShowCalendar() {
                         onClickDay={handleDayClick}
                         value={selectedDate}
                     />
-                    {selectedDate && selectedDate.getMonth() === monthDate.getMonth() && 
-                        renderLogDetails(logMap.get(selectedDate.toLocaleDateString('en-US')))}
                 </div>
             ))}
         </div>
