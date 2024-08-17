@@ -3,10 +3,11 @@
 /* - - - - - - - - - - - - - - - - - - - - */
 
 :root {
-    --clrWkDs: var(--txtClrSecondary);
-    --clrNgbr: #999;
-    --clrMnths: var(--txtClrSecondary);
-    --clrHglgt: #e8f8e8;
+    --clrWkDs: var(--clrSecText);
+    --clrNgbr: var(--clrSecText);
+    --clrMnths: var(--clrSecText);
+    /* --clrHglgt: #e8f8e8; */
+    /* --clrHglgt: var(--clrBG); */
     --clrGood: #28C828;
     --clrBad: #C82828;
 }
@@ -32,7 +33,7 @@
 .react-calendar {
     display: flex;
     width: 100%;
-    border: 1px solid var(--clrBorder);
+    border: 1px solid var(--clrBorderD);
     border-radius: 8px;
     /* padding: 4px; */
     font-size: 16px;
@@ -61,23 +62,15 @@
     transition: none !important;
     background: white !important;
 }
-.react-calendar__tile:hover {
-    /* background-color: var(--clrHglgt) !important; */
-    cursor: pointer;
-}
+.react-calendar__tile:hover { cursor: pointer; }
 
-.react-calendar__tile.highlight:hover {
-    background: var(--clrHglgt);
-}
+/* .react-calendar__tile.highlight:hover { background: var(--clrHglgt1); } */
 .react-calendar__tile--active:hover {
     background: var(--clrPrimary) !important;
     color: var(--txtClrPrimary) !important;
 }
 
-.highlight {
-    background: var(--clrHglgt); /* Highlighting Dates with Logs */
-    background: transparent;
-}
+.highlight { background: transparent; }
 
 /* Disable pointer events for cells with the 'empty' class */
 .react-calendar__tile.empty {
@@ -119,7 +112,7 @@
 }
 
 .react-calendar__month-view__days__day--weekend {
-    color: red;
+    color: var(--clrAccent);
 }
 
 /* Responsive Design */
@@ -159,8 +152,9 @@
     /* margin-top: 8px; */
     margin: 8px 0;
     padding: 8px;
-    background: var(--clrHglgt);
-    border: 1px solid var(--clrBorder);
+    background: var(--clrHglgt1);
+    background: var(--clrBG);
+    border: 1px solid var(--clrBorderD);
     border-radius: 4px;
 }
 

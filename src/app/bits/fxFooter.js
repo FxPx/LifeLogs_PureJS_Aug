@@ -20,13 +20,13 @@ export default function FxFooter() {
 
   return (
     <footer className="divInputs">
-      <input type="datetime-local" placeholder="Log Date-Time…" className="inputDateTime" onKeyDown={handleKeyDown} />
-      <input type="number" placeholder="Reading" className="inputNumber" onChange={handleNumberInputChange} onKeyDown={handleKeyDown} />
+      <input type="datetime-local" className="inputDateTime" onKeyDown={handleKeyDown} />
       <label className="checkboxLabel">
         <input type="checkbox" checked={isFastChecked} onChange={handleCheckboxChange} className="checkboxFast" />
         Fast
       </label>
-      <input type="text" placeholder="Notes" className="inputText" onKeyDown={handleKeyDown} />
+      <input type="number" placeholder="Reading" className="inputNumber" onChange={handleNumberInputChange} onKeyDown={handleKeyDown} />
+      <input type="text" placeholder="Notes" className="inputNotes" onKeyDown={handleKeyDown} />
       <button className="saveButton" ref={saveButtonRef}>Save</button>
     </footer>
   );

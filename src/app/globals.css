@@ -30,10 +30,10 @@
   --xtxtBtn_White: #ffffff;
   --xclrBorder: #ced4da;
   --xshadow-color: rgba(0, 0, 0, 0.1);
-
 /* X X X X */
+
     /* Main Colors */
-    --clrPrimary: #3498db;
+    --clrPrimary: #2090ff;
     --clrSecondary: #2ecc71;
     --clrAccent: #e74c3c;
   
@@ -42,7 +42,11 @@
     --clrBGAlt0: #f9fafa;
     --clrBGAlt1: #F0F8F8;
     --clrBGAlt2: #F0FAFA;
+    --clrHglgt1: #e8f8e8;
     --clrBGAlt3: #C8E8E8;
+    --clrBGDrk1: #303030;
+    --clrBGDrk2: #404040;
+    --clrBGDrk3: #808080;
   
     /* Text Colors */
     --clrPrimText: #2c3e50;
@@ -50,6 +54,7 @@
   
     /* Border and Shadow */
     --clrBorder: #dfe6e9;
+    --clrBorderD: #ced4da;
     --clrShadow: rgba(0, 0, 0, 0.1);
   
     /* Button Colors */
@@ -124,8 +129,10 @@ main {
   margin: 0 auto;
   margin-top: var(--hNavBar);
   background: var(--clrBGAlt2);
+  background: var(--clrBG);
+  background: white;
   position: relative;
-  padding: 24px 16px 64px 16px;
+  padding: 24px 16px 80px 16px;
 }
 
 a {
@@ -144,8 +151,8 @@ button {
   min-height: 34px;
   min-width: max-content ;
   color: var(--txtBtn_White);
-  background: var(--button-bg);
-  border: 1px solid var(--button-border);
+  background: var(--clrPrimary);
+  border: 1px solid var(--clrPrimary);
   border-radius: var(--borderRadius);
   cursor: pointer;
   /* transition: background-color 0.3s; */
@@ -162,4 +169,15 @@ button:hover { background: var(--button-hover-bg); }
   box-shadow: 0 4px 6px var(--shadow-color);
 }
 
+/* - - - - - - - - - - - - - - - - - - - - */
+@media (max-width: 600px) {
+  .inputNotes {
+      flex: 1 1 0%;
+      min-width: 120px;
+  }
+
+  .divContent {
+      padding: 24px 16px 128px 16px;
+    }
+  }
 /* - - - - - - - - - - - - - - - - - - - - */
