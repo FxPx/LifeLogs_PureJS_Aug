@@ -15,20 +15,58 @@
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
+    /* X X X X */
   /* Color Variables */
-  --foreground: #333333;
-  --background: #f4f7f6;
-  --clrPrimary: #1e90ff;
-  --clrSecondary: #ff6347;
-  --tertiary-color: #32cd32;
-  --txtClrPrimary: #2e2e2e;
-  --txtClrSecondary: #6c757d;
-  --button-bg: #1e90ff;
-  --button-border: #1e90ff;
-  --button-hover-bg: #020303;
-  --txtBtn_White: #ffffff;
-  --clrBorder: #ced4da;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  /* --xforeground: #333333; */
+  /* --xbackground: #f4f7f6; */
+  --xclrPrimary: #1e90ff;
+  --xclrSecondary: #ff6347;
+  --xtertiary-color: #32cd32;
+  --xtxtClrPrimary: #2e2e2e;
+  --xtxtClrSecondary: #6c757d;
+  --xbutton-bg: #1e90ff;
+  --xbutton-border: #1e90ff;
+  --xbutton-hover-bg: #020303;
+  --xtxtBtn_White: #ffffff;
+  --xclrBorder: #ced4da;
+  --xshadow-color: rgba(0, 0, 0, 0.1);
+
+/* X X X X */
+    /* Main Colors */
+    --clrPrimary: #3498db;
+    --clrSecondary: #2ecc71;
+    --clrAccent: #e74c3c;
+  
+    /* Background Colors */
+    --clrBG: #F8F9Fa;
+    --clrBGAlt0: #f9fafa;
+    --clrBGAlt1: #F0F8F8;
+    --clrBGAlt2: #F0FAFA;
+    --clrBGAlt3: #C8E8E8;
+  
+    /* Text Colors */
+    --clrPrimText: #2c3e50;
+    --clrSecText: #7f8c8d;
+  
+    /* Border and Shadow */
+    --clrBorder: #dfe6e9;
+    --clrShadow: rgba(0, 0, 0, 0.1);
+  
+    /* Button Colors */
+    --clrBtnBG: var(--clrPrimary);
+    --clrBtnText: #ffffff;
+    --clrBtnHover: #2980b9;
+  
+    /* Input Colors */
+    --clrInputBG: #ffffff;
+    --clrInputBorder: #bdc3c7;
+    --clrInputFocus: var(--clrPrimary);
+  
+    /* Status Colors */
+    --clrSuccess: #27ae60;
+    --clrWarning: #f39c12;
+    --clrError: #c0392b;
+    --clrInfo: #3498db;
 
   /* Default Font Size */
   --font-size: 14px;
@@ -81,15 +119,11 @@ main {
 }
 
 .divContent {
-  /* height: calc(100% - 104px); */
   width: 100vw;
   max-width: var(--maxWidth);
   margin: 0 auto;
   margin-top: var(--hNavBar);
-  /* Ensure the content starts below the fxNavBar */
-
-  background: lightgreen;
-  background: ghostwhite;
+  background: var(--clrBGAlt2);
   position: relative;
   padding: 24px 16px 64px 16px;
 }
@@ -101,18 +135,23 @@ a {
 
 /* Button Styles */
 button {
-  background-color: var(--button-bg);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 8px;
+  padding: 0 24px;
+  min-height: 34px;
+  min-width: max-content ;
   color: var(--txtBtn_White);
+  background: var(--button-bg);
   border: 1px solid var(--button-border);
   border-radius: var(--borderRadius);
-  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  /* transition: background-color 0.3s; */
 }
 
-button:hover {
-  background-color: var(--button-hover-bg);
-}
+button:hover { background: var(--button-hover-bg); }
 
 .border {
   border: 1px solid var(--clrBorder);

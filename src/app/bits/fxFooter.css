@@ -1,0 +1,182 @@
+/* - - - - - - - - - - - - - - - - - - - - */
+/* src/app/bits/fxFooter.css | FxFooter Styles | Sree | 16 Aug 2024 */
+/* - - - - - - - - - - - - - - - - - - - - */
+
+/* .divInputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+    gap: 16px;
+    padding: 8px 24px;
+    box-sizing: border-box;
+    border-top: 1px solid var(--clrBorder);
+    color: var(--txtClrPrimary);
+    background: rgba(200, 200, 200, .8);
+    background: var(--clrSecondary);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 88;
+    align-items: center;
+} */
+.divInputs {
+    display: flex;
+    justify-content: flex-end;
+    justify-content: center;
+    gap: 16px;
+    padding: 8px 24px;
+    box-sizing: border-box;
+    border-top: 1px solid var(--clrBorder);
+    color: var(--txtClrPrimary);
+    background: rgba(200, 200, 200, .8);
+    background: var(--clrSecondary);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 88;
+    align-items: center;
+    /* Vertically center items */
+}
+
+
+.divInputs * {
+    height: 34px;
+    box-sizing: border-box;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid transparent;
+    border-radius: 4px !important;
+}
+
+.inputDateTime,
+.inputNumber,
+.inputText,
+.checkboxLabel {
+    padding: 4px 8px;
+    background: white;
+}
+
+.inputDateTime,
+.inputNumber,
+.checkboxLabel {
+    grid-column: span 1;
+}
+
+.saveButton {
+    /* max-width: 168px; */
+    background: chartreuse;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkboxFast {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+}
+
+.checkboxFast:checked::before {
+    content: '✓';
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.checkboxFast:focus {
+    outline: none;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - */
+@media (max-width: 864px) {
+    .divInputs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 16px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .inputDateTime {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 0;
+    }
+
+    .inputNumber {
+        flex: 0 0 96px;
+        max-width: 96px;
+    }
+
+    .checkboxLabel {
+        flex: 0 1 auto;
+        gap: 4px;
+        margin-right: 8px;
+    }
+
+    .inputText {
+        flex: 1 1 0%;
+        min-width: 0;
+    }
+
+    .saveButton {
+        flex: 0 0 96px;
+        min-width: 96px;
+    }
+
+    @media (max-width: 864px) and (min-width: 601px) {
+        .inputDateTime { flex: 1 1 calc(50% - 8px); }
+
+        .inputNumber {
+            flex: 0 0 128px;
+            max-width: 128px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .inputText {
+            flex: 1 1 0%;
+            min-width: 120px;
+        }
+    }
+
+    /* New media query for landscape mode */
+    @media (max-width: 926px) and (orientation: landscape) {
+        .divInputs { flex-wrap: nowrap; }
+
+        .inputDateTime {
+            flex: 0 1 auto;
+            min-width: 150px;
+        }
+
+        .inputNumber {
+            flex: 0 0 80px;
+            max-width: 80px;
+        }
+
+        .checkboxLabel { flex: 0 0 auto; }
+
+        .inputText {
+            flex: 1 1 0%;
+            min-width: 100px;
+        }
+
+        .saveButton {
+            flex: 0 0 80px;
+            min-width: 80px;
+        }
+    }
+}
+/* - - - - - - - - - - - - - - - - - - - - */

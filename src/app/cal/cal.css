@@ -7,8 +7,8 @@
     --clrNgbr: #999;
     --clrMnths: var(--txtClrSecondary);
     --clrHglgt: #e8f8e8;
-    --clrGood: rgb(40, 200, 40);
-    --clrBad: rgb(200, 40, 40);
+    --clrGood: #28C828;
+    --clrBad: #C82828;
 }
 
 /* Overall Calendar Container */
@@ -114,7 +114,7 @@
     text-transform: capitalize;
     height: 32px;
     color: var(--clrWkDs);
-    background: #f9fafa;
+    background: var(--clrBGAlt0);
     border-bottom: 0.5px solid var(--clrBorder);
 }
 
