@@ -2,6 +2,23 @@
 /* src/app/bits/fxFooter.css | FxFooter Styles | Sree | 16 Aug 2024 */
 /* - - - - - - - - - - - - - - - - - - - - */
 
+/* .divInputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+    gap: 16px;
+    padding: 8px 24px;
+    box-sizing: border-box;
+    border-top: 1px solid var(--clrBorder);
+    color: var(--txtClrPrimary);
+    background: rgba(200, 200, 200, .8);
+    background: var(--clrSecondary);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 88;
+    align-items: center;
+} */
 .divInputs {
     display: flex;
     justify-content: flex-end;
@@ -11,8 +28,8 @@
     box-sizing: border-box;
     border-top: 1px solid var(--clrBorder);
     color: var(--txtClrPrimary);
-    background: var(--clrBGDrk3);
-    /* background: var(--clrBtnHover); */
+    background: rgba(200, 200, 200, .8);
+    background: var(--clrSecondary);
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -22,19 +39,19 @@
     /* Vertically center items */
 }
 
+
 .divInputs * {
     height: 34px;
     box-sizing: border-box;
     padding: 8px;
-    font-size: 14px;
-    letter-spacing: 0.5px;
+    font-size: 16px;
     border: 1px solid transparent;
     border-radius: 4px !important;
 }
 
 .inputDateTime,
 .inputNumber,
-.inputNotes,
+.inputText,
 .checkboxLabel {
     padding: 4px 8px;
     background: white;
@@ -44,6 +61,11 @@
 .inputNumber,
 .checkboxLabel {
     grid-column: span 1;
+}
+
+.saveButton {
+    /* max-width: 168px; */
+    background: chartreuse;
 }
 
 .checkboxLabel {
@@ -56,11 +78,9 @@
 
 .checkboxFast {
     appearance: none;
-    width: 16px;
-    height: 16px;
-    background: var(--clrBG);
-    border: 1px solid var(--clrInputBorder);
-    border-radius: 2px !important;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
     cursor: pointer;
     position: relative;
     margin: 0;
@@ -68,22 +88,16 @@
 
 .checkboxFast:checked::before {
     content: '✓';
-    /* font-size: 14px; */
-    font-weight: 500;
+    font-size: 16px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.saveButton {
-    /* max-width: 168px; */
-    padding: 0 24px;
-    color: var(--clrPrimary) !important;
-    background: var(--clrInputBG);
+.checkboxFast:focus {
+    outline: none;
 }
-
-.checkboxFast:focus { outline: none; }
 
 /* - - - - - - - - - - - - - - - - - - - - */
 @media (max-width: 864px) {
@@ -108,10 +122,11 @@
 
     .checkboxLabel {
         flex: 0 1 auto;
-        /* gap: 4px; */
+        gap: 4px;
+        margin-right: 8px;
     }
 
-    .inputNotes {
+    .inputText {
         flex: 1 1 0%;
         min-width: 0;
     }
@@ -131,7 +146,7 @@
     }
 
     @media (max-width: 600px) {
-        .inputNotes {
+        .inputText {
             flex: 1 1 0%;
             min-width: 120px;
         }
@@ -153,7 +168,7 @@
 
         .checkboxLabel { flex: 0 0 auto; }
 
-        .inputNotes {
+        .inputText {
             flex: 1 1 0%;
             min-width: 100px;
         }

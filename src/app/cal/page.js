@@ -17,7 +17,7 @@ const parseDate = dateString => {
 /* - - - - - - - - - - - - - - - - - - - - */
 const getDotColor = (value, [min, max]) => {
     const numValue = Number(value);
-    return !isNaN(numValue) && numValue >= min && numValue <= max ? 'var(--clrSecondary)' : 'var(--clrAccent)';
+    return !isNaN(numValue) && numValue >= min && numValue <= max ? 'var(--clrGood)' : 'var(--clrBad)';
 };
 /* - - - - - - - - - - - - - - - - - - - - */
 const logConfig = [
