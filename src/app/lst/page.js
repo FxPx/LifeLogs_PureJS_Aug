@@ -4,7 +4,7 @@
 
 'use client';
 
-import { useData } from '../fxDataContext';
+import { useData } from '../api/fxDataContext';
 
 export default function ListPage() {
   const initialData = useData(); // Access data from context

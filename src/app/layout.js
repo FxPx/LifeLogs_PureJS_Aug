@@ -9,7 +9,7 @@ import "./fxPatterns.css";
 import FxTitleBar from "./bits/fxTitleBar";
 import FxFooter from "./bits/fxFooter";  // Import FxFooter
 import { fetchSheetData } from './api/fxFetchData';
-import { DataProvider } from './fxDataContext';
+import { DataProvider } from './api/fxDataContext';
 
 const inter = Inter({ subsets: ["latin"] });
 
