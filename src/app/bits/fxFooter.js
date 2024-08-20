@@ -3,7 +3,7 @@
 /* - - - - - - - - - - - - - - - - - - - - */
 
 "use client";
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './fxFooter.css';
 
 export const formatDateTime = (dateString) => {
@@ -15,17 +15,11 @@ export const formatDateTime = (dateString) => {
       time: date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }),
     };
 };
-/* - - - - - - - - - - - - - - - - - - - - */
 
 export default function FxFooter() {
   const saveButtonRef = useRef(null);
-  const [formData, setFormData] = useState({
-    dateTime: '',
-    reading: '',
-    isFast: true,
-    notes: ''
-  });
-  /* - - - - - - - - - - - - - - - - - - - - */
+  const [formData, setFormData] = useState({ dateTime: '', reading: '', isFast: true, notes: '' });
+  const [statusMessage, setStatusMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -35,13 +29,16 @@ export default function FxFooter() {
       isFast: name === 'reading' ? true : (name === 'isFast' ? checked : prev.isFast)
     }));
   };
-  /* - - - - - - - - - - - - - - - - - - - - */
+
+  const showToast = (message) => {
+    setStatusMessage(message);
+    setTimeout(() => setStatusMessage(''), 3000);
+  };
 
   const handleSave = async () => {
     if (!formData.reading) return;
 
     let { date, time } = formatDateTime(formData.dateTime);
-
     if (!date || !time) {
       const now = new Date();
       ({ date, time } = formatDateTime(now.toISOString()));
@@ -67,15 +64,16 @@ export default function FxFooter() {
       if (!response.ok) throw new Error('Failed to save data');
 
       setFormData({ dateTime: '', reading: '', isFast: true, notes: '' });
-      console.log('Google Sheets: Data saved successfully');
+      showToast('Data saved successfully');
     } catch (error) {
       console.error('Error saving data:', error);
-      console.log('Google Sheets: Failed to save data...');
+      showToast('Failed to save data');
     }
   };
 
   return (
     <footer className="divInputs">
+      {statusMessage && <div className="toastMessage">{statusMessage}</div>}
       <input
         type="datetime-local"
         name="dateTime"
