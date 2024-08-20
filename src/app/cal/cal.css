@@ -149,14 +149,13 @@
     /* margin: 1px; */
 }
 /* - - - - - - - - - - - - - - - - - - - - */
-.divWrapLog {
+/* .divWrapLog {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto auto 1fr;
     gap: 4px;
     align-items: center;
     box-sizing: border-box;
     min-height: 24px;
-    /* margin-top: 8px; */
     margin: 8px 0;
     padding: 8px;
     background: var(--clrHglgt);
@@ -166,13 +165,6 @@
 
 .log-values { grid-column: 1; }
 
-.close-icon {
-    cursor: pointer;
-    margin-left: 8px;
-    color: var(--txtClrSecondary);
-    font-size: 20px !important;
-}
-
 .log-comments {
     grid-column: 2;
     display: flex;
@@ -181,4 +173,48 @@
     justify-content: flex-end;
     text-align: right;
 }
+
+.close-icon {
+    cursor: pointer;
+    margin-left: 8px;
+    max-width: max-content;
+    margin: auto;
+    align-self: flex-end;
+    color: var(--txtClrSecondary);
+    font-size: 20px !important;
+} */
 /* - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - */
+.divWrapLog {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-sizing: border-box;
+    min-height: 24px;
+    margin: 8px 0;
+    padding: 8px;
+    background: var(--clrHglgt);
+    border: 1px solid var(--clrBorder);
+    border-radius: 4px;
+}
+
+.log-values {
+    /* This will ensure the log values div is full-width */
+    width: 100%;
+}
+
+.log-comments {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    width: 100%;
+}
+
+.close-icon {
+    cursor: pointer;
+    margin-left: auto; /* Pushes the close icon to the far right */
+    width: max-content;
+    color: var(--txtClrSecondary);
+    font-size: 20px !important;
+}

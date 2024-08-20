@@ -30,6 +30,8 @@
     color: var(--txtClrPrimary);
     background: rgba(200, 200, 200, .8);
     background: var(--clrSecondary);
+    background: #dcc8ff;
+    /* background: #c9ffeb; */
     width: 100%;
     position: fixed;
     bottom: 0;

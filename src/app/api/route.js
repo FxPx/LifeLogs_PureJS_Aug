@@ -1,17 +1,21 @@
-// src/app/api/sheet/route.js
+/* - - - - - - - - - - - - - - - - - - - - */
+/* src/app/api/route.js | Calendar Page | Sree | 19 Aug 2024 */
+/* - - - - - - - - - - - - - - - - - - - - */
 
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
-const auth = new google.auth.GoogleAuth({
-  credentials: {
-    client_email: process.env.GS_CLIENT_EMAIL,
-    private_key: process.env.GS_PRIVATE_KEY.replace(/\\n/g, '\n'),
-  },
-  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-});
+// const auth = new google.auth.GoogleAuth({
+//   credentials: {
+//     client_email: process.env.GS_CLIENT_EMAIL,
+//     private_key: process.env.GS_PRIVATE_KEY.replace(/\\n/g, '\n'),
+//   },
+//   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+// });
 
-const sheets = google.sheets({ version: 'v4', auth });
+// const sheets = google.sheets({ version: 'v4', auth });
+import { sheets } from './fxFetchData';
+
 const { GS_SHEET_ID, GS_SHEET_NAME } = process.env;
 const sheetRange = `${GS_SHEET_NAME}!A1:E`;
 const searchRange = `${GS_SHEET_NAME}!A:A`;
@@ -103,3 +107,4 @@ export async function DELETE(request) {
     return handleError(error, 'Failed to delete data');
   }
 }
+/* - - - - - - - - - - - - - - - - - - - - */
