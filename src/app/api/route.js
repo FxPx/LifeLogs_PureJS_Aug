@@ -5,17 +5,15 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
-// const auth = new google.auth.GoogleAuth({
-//   credentials: {
-//     client_email: process.env.GS_CLIENT_EMAIL,
-//     private_key: process.env.GS_PRIVATE_KEY.replace(/\\n/g, '\n'),
-//   },
-//   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-// });
-
-// const sheets = google.sheets({ version: 'v4', auth });
-import { sheets } from './fxFetchData';
-
+// Initialize Google Sheets API
+const auth = new google.auth.GoogleAuth({
+  credentials: {
+    client_email: process.env.GS_CLIENT_EMAIL,
+    private_key: process.env.GS_PRIVATE_KEY.replace(/\\n/g, '\n'),
+  },
+  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+});
+const sheets = google.sheets({ version: 'v4', auth });
 const { GS_SHEET_ID, GS_SHEET_NAME } = process.env;
 const sheetRange = `${GS_SHEET_NAME}!A1:E`;
 const searchRange = `${GS_SHEET_NAME}!A:A`;
@@ -25,6 +23,10 @@ const handleError = (error, message) => {
   return NextResponse.json({ error: message }, { status: 500 });
 };
 
+export { sheets, sheetRange, searchRange, handleError }; // Export configuration and utility functions
+/* - - - - - - - - - - - - - - - - - - - - */
+
+// API route handlers
 export async function GET() {
   try {
     const { data: { values = [] } } = await sheets.spreadsheets.values.get({
@@ -36,6 +38,7 @@ export async function GET() {
     return handleError(error, 'Failed to fetch data');
   }
 }
+/* - - - - - - - - - - - - - - - - - - - - */
 
 export async function POST(request) {
   try {
@@ -51,6 +54,7 @@ export async function POST(request) {
     return handleError(error, 'Failed to add data');
   }
 }
+/* - - - - - - - - - - - - - - - - - - - - */
 
 export async function PUT(request) {
   try {
@@ -75,6 +79,7 @@ export async function PUT(request) {
     return handleError(error, 'Failed to update data');
   }
 }
+/* - - - - - - - - - - - - - - - - - - - - */
 
 export async function DELETE(request) {
   try {
