@@ -19,11 +19,10 @@ export async function fetchSheetData(baseUrl) {
             },
         });
         // console.log('Response: ', response);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+        if (!response.ok) { throw new Error('Network response was not ok'); }
 
         const { data } = await response.json();
+        // console.log('Data:', data);
         return data || [];
     } catch (error) {
         console.error('Failed to fetch data:', error);

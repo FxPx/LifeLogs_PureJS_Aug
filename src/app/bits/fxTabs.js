@@ -14,8 +14,8 @@ const FxTabs = () => {
   return (
     <div className="tabsWrap">
       <Link href="/" className={`divTab ${pathname === '/' ? 'active' : ''}`}>Trends</Link>
-      <Link href="/cal" className={`divTab ${pathname === '/cal' ? 'active' : ''}`}>Dates</Link>
-      <Link href="/lst" className={`divTab ${pathname === '/lst' ? 'active' : ''}`}>Logs</Link>
+      <Link href="/cal" className={`divTab ${pathname === '/cal' ? 'active' : ''}`}>Logs</Link>
+      {/* <Link href="/lst" className={`divTab ${pathname === '/lst' ? 'active' : ''}`}>Logs</Link> */}
     </div>
   );
 };

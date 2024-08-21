@@ -2,15 +2,99 @@
 /* src/app/lst/lst.css | List Page Styles | Sree | 13 Aug 2024 */
 /* - - - - - - - - - - - - - - - - - - - - */
 
-.list-item {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 8px;
+/* Table styles */
+
+.table-wrapper {
+    height: calc(100vh - (112px + 32px));
+    box-sizing: border-box;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 0;
 }
 
-.list-cell {
-    padding: 4px 8px;
-    background-color: #f1f1f1;
-    border-radius: 4px;
+.data-table {
+    box-sizing: border-box;
+    width: 100%;
+    /* Full width of the container */
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--clrBorder);
+    height: 100%;
+    /* Ensure table fills the container */
+    overflow: auto;
+    /* Enable scrolling for table content */
 }
+
+.data-table th,
+.data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    height: 40px;
+}
+
+.data-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+/* Other styles */
+.table-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-cell {
+    word-break: break-word;
+}
+
+.no-data {
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
+}
+
+.options-cell {
+    position: relative;
+}
+
+.material-symbols-outlined {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 8px;
+}
+
+.material-symbols-outlined:hover {
+    color: #333;
+    /* Highlight on hover */
+}
+
+.options-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.options-menu button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.options-menu button:hover {
+    background-color: #f4f4f4;
+}
+
 /* - - - - - - - - - - - - - - - - - - - - */
