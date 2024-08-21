@@ -5,6 +5,8 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
+export const fetchCache = 'force-no-store'; // Disabling Vercel Data Cache
+
 // Initialize Google Sheets API
 const auth = new google.auth.GoogleAuth({
   credentials: {
@@ -27,19 +29,46 @@ export { sheets, sheetRange, searchRange, handleError }; // Export configuration
 /* - - - - - - - - - - - - - - - - - - - - */
 
 // API route handlers
+// export async function GET() {
+//   try {
+//     const { data: { values = [] } } = await sheets.spreadsheets.values.get({
+//       spreadsheetId: GS_SHEET_ID,
+//       range: sheetRange,
+//     });
+//     return NextResponse.json(
+//       { data: values },
+//       {
+//         headers: {
+//           'Cache-Control': 'no-store, max-age=0',
+//           'Pragma': 'no-cache',
+//           'Expires': '0',
+//         },
+//       }
+//     );
+//   } catch (error) {
+//     return handleError(error, 'Failed to fetch data');
+//   }
+// }
 export async function GET() {
   try {
+    const timestamp = Date.now();
     const { data: { values = [] } } = await sheets.spreadsheets.values.get({
       spreadsheetId: GS_SHEET_ID,
       range: sheetRange,
-    });
+      fields: '*',
+      prettyPrint: false,
+      quotaUser: `user-${timestamp}`,
+    }, { cache: 'no-store' });  // For Vercel cache disabling
+
     return NextResponse.json(
-      { data: values },
+      { data: values, timestamp },
       {
         headers: {
-          'Cache-Control': 'no-store, max-age=0',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
           'Pragma': 'no-cache',
           'Expires': '0',
+          'Surrogate-Control': 'no-store',
+          'ETag': `"${timestamp}"`,
         },
       }
     );

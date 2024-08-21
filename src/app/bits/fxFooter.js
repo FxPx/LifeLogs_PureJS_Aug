@@ -37,17 +37,17 @@
 
 //   const handleSave = async () => {
 //     if (!formData.reading) return;
-  
+
 //     let { date, time } = formatDateTime(formData.dateTime);
 //     if (!date || !time) {
 //       const now = new Date();
 //       ({ date, time } = formatDateTime(now.toISOString()));
 //       setFormData(prev => ({ ...prev, dateTime: now.toISOString().split('.')[0] }));
 //     }
-  
+
 //     const fastCol = formData.isFast ? formData.reading : '';
 //     const slowCol = formData.isFast ? '' : formData.reading;
-  
+
 //     const requestData = {
 //       col0: date,
 //       col1: time,
@@ -55,22 +55,22 @@
 //       col3: slowCol,
 //       col4: formData.notes
 //     };
-  
+
 //     console.log('Sending data:', requestData);
-  
+
 //     try {
 //       const response = await fetch('/api/', {
 //         method: 'POST',
 //         headers: { 'Content-Type': 'application/json' },
 //         body: JSON.stringify(requestData),
 //       });
-  
+
 //       // Log the raw response data
 //       const responseData = await response.json();
 //       console.log('API response:', responseData);
-  
+
 //       if (!response.ok) throw new Error('Failed to save data');
-  
+
 //       setFormData({ dateTime: '', reading: '', isFast: true, notes: '' });
 //       showToast('Data saved successfully');
 //     } catch (error) {
@@ -78,7 +78,7 @@
 //       showToast('Failed to save data');
 //     }
 //   };
-  
+
 
 //   return (
 //     <footer className="divInputs">
@@ -194,7 +194,12 @@ export default function FxFooter() {
     try {
       const response = await fetch('/api/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        // headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
         body: JSON.stringify(requestData),
       });
 
