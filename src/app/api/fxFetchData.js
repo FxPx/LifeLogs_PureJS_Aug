@@ -27,13 +27,31 @@ export async function fetchSheetData() {
 /* - - - - - - - - - - - - - - - - - - - - */
 
 /* Append data to Google Sheets */
-export async function appendSheetData(values) {
+// export async function appendSheetData(values) {
+//     try {
+//         const response = await sheets.spreadsheets.values.append({
+//             spreadsheetId: process.env.GS_SHEET_ID,
+//             range: sheetRange,
+//             valueInputOption: 'USER_ENTERED',
+//             resource: { values: [values] },
+//         });
+//         return response.data;
+//     } catch (error) {
+//         console.error('Failed to append data:', error);
+//         throw error;
+//     }
+// }
+/* - - - - - - - - - - - - - - - - - - - - */
+/* Append data to Google Sheets */
+export async function XXXappendSheetData(date, time, fastCol, slowCol, notes) {
     try {
         const response = await sheets.spreadsheets.values.append({
             spreadsheetId: process.env.GS_SHEET_ID,
-            range: sheetRange,
+            // range: sheetRange,
+            range: 'Sheet1!A1', // Ensure this is correctly set to start from Column A
+
             valueInputOption: 'USER_ENTERED',
-            resource: { values: [values] },
+            resource: { values: [[date, time, fastCol, slowCol, notes]] },
         });
         return response.data;
     } catch (error) {
@@ -41,4 +59,3 @@ export async function appendSheetData(values) {
         throw error;
     }
 }
-/* - - - - - - - - - - - - - - - - - - - - */
