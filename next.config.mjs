@@ -3,6 +3,7 @@
 // next.config.mjs
 export default {
   reactStrictMode: true,
+  
 };
 
 // /** @type {import('next').NextConfig} */

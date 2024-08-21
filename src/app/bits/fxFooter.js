@@ -5,7 +5,7 @@
 "use client";
 import React, { useRef, useState } from 'react';
 import './fxFooter.css';
-export const fetchCache = 'force-no-store';
+export const fetchCache = 'force-no-store'; // Disabling Vercel Data Cache
 /* - - - - - - - - - - - - - - - - - - - - */
 
 export const formatDateTime = (dateString) => {

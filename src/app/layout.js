@@ -10,6 +10,7 @@ import FxTitleBar from "./bits/fxTitleBar";
 import FxFooter from "./bits/fxFooter";  // Import FxFooter
 import { fetchSheetData } from './api/fxFetchData';
 import { DataProvider } from './api/fxDataContext';
+export const fetchCache = 'force-no-store'; // Disabling Vercel Data Cache
 
 const inter = Inter({ subsets: ["latin"] });
 
