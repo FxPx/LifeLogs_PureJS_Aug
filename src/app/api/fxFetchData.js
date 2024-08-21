@@ -3,6 +3,7 @@
 /* - - - - - - - - - - - - - - - - - - - - */
 
 import { sheets, sheetRange } from './route'; // Import from centralized file
+export const fetchCache = 'force-no-store';
 
 // Fetch data from Google Sheets
 export async function fetchSheetData() {
@@ -17,7 +18,9 @@ export async function fetchSheetData() {
                 'Pragma': 'no-cache',
                 'Expires': '0',
             },
+            // cache: 'no-store',  // Ensure no Vercel caching
         });
+        console.log('Fetched data:', data.values)
         return data.values || [];
     } catch (error) {
         console.error('Failed to fetch data:', error);

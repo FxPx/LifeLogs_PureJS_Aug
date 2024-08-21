@@ -4,7 +4,6 @@
 
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
-
 export const fetchCache = 'force-no-store'; // Disabling Vercel Data Cache
 
 // Initialize Google Sheets API
@@ -29,26 +28,6 @@ export { sheets, sheetRange, searchRange, handleError }; // Export configuration
 /* - - - - - - - - - - - - - - - - - - - - */
 
 // API route handlers
-// export async function GET() {
-//   try {
-//     const { data: { values = [] } } = await sheets.spreadsheets.values.get({
-//       spreadsheetId: GS_SHEET_ID,
-//       range: sheetRange,
-//     });
-//     return NextResponse.json(
-//       { data: values },
-//       {
-//         headers: {
-//           'Cache-Control': 'no-store, max-age=0',
-//           'Pragma': 'no-cache',
-//           'Expires': '0',
-//         },
-//       }
-//     );
-//   } catch (error) {
-//     return handleError(error, 'Failed to fetch data');
-//   }
-// }
 export async function GET() {
   try {
     const timestamp = Date.now();
@@ -77,6 +56,7 @@ export async function GET() {
   }
 }
 /* - - - - - - - - - - - - - - - - - - - - */
+
 /* Claude gave this solution */
 export async function POST(request) {
   try {
@@ -86,7 +66,6 @@ export async function POST(request) {
     // First, get the current values in the sheet
     const { data: { values } } = await sheets.spreadsheets.values.get({
       spreadsheetId: GS_SHEET_ID,
-      // range: `${GS_SHEET_NAME}!A:A`,  // Only check column A
       range: searchRange,  // Only check column A
     });
 
@@ -108,35 +87,6 @@ export async function POST(request) {
     return handleError(error, 'Failed to add data');
   }
 }
-
-/* CGPT says that the below is improved; but it fills in first found empty row. Hence ignoring - Sree */
-/* export async function POST(request) {
-  try {
-    const { col0, col1, col2, col3, col4 = '' } = await request.json();
-    console.log('Preparing to append data:', { col0, col1, col2, col3, col4 });
-
-    // Fetch current values in the sheet, checking columns A to E
-    const { data: { values } } = await sheets.spreadsheets.values.get({
-      spreadsheetId: GS_SHEET_ID,
-      range: sheetRange,  // Check columns A to E
-    });
-
-    const nextRow = values.findIndex(row => row.every(cell => !cell || cell.trim() === '')) + 1 || values.length + 1; // Find the next completely empty row
-    const appendRange = `${GS_SHEET_NAME}!A${nextRow}:E${nextRow}`; // Specify the exact range for the new row
-    console.log('Appending to range:', appendRange);
-    const res = await sheets.spreadsheets.values.update({
-      spreadsheetId: GS_SHEET_ID,
-      range: appendRange,
-      valueInputOption: 'USER_ENTERED',
-      resource: { values: [[col0, col1, col2, col3, col4]] },
-    });
-    console.log('API Response:', res);
-    return NextResponse.json({ message: 'Data added successfully', res });
-  } catch (error) {
-    console.error('Error adding data:', error);
-    return handleError(error, 'Failed to add data');
-  }
-} */
 /* - - - - - - - - - - - - - - - - - - - - */
 
 export async function PUT(request) {
