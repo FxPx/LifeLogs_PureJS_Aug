@@ -29,6 +29,7 @@ export { sheets, sheetRange, searchRange, handleError }; // Export configuration
 
 // API route handlers
 export async function GET() {
+  console.log('Now inside route.js - GET...')
   try {
     const timestamp = Date.now();
     const { data: { values = [] } } = await sheets.spreadsheets.values.get({
