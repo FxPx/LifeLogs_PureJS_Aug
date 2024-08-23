@@ -123,7 +123,7 @@ main {
   max-width: var(--maxWidth);
   margin: 0 auto;
   margin-top: var(--hNavBar);
-  background: var(--clrBGAlt2);
+  background: var(--clrBGAlt0);
   position: relative;
   padding: 24px 16px 64px 16px;
 }
