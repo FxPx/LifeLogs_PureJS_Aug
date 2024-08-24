@@ -15,3 +15,14 @@
 .recharts-surface {
     background-color: transparent;
 } */
+
+.recharts-text recharts-label tspan {
+    color: red !important;
+}
+
+
+@media (max-width: 600px) {
+    .recharts-bar {
+        margin: 0 8px; /* Adjust gap between bars on mobile screens */
+    }
+}
